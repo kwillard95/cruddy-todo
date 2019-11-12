@@ -8,23 +8,29 @@ const counter = require('./counter');
 // Public API - Fix these CRUD functions ///////////////////////////////////////
 
 exports.create = (text, callback) => {
-  debugger;
   counter.getNextUniqueId((err, id) => {
     fs.writeFile((exports.dataDir + `/${id}.txt`), text, (err) => {
       if (err) {
         throw ('error');
       } else {
-        callback(null, {text, id});
+        callback(null, { text, id });
       }
     });
   });
 };
 
 exports.readAll = (callback) => {
-  var data = _.map(items, (text, id) => {
-    return { id, text };
+  fs.readdir(exports.dataDir, (err, files) => {
+    if (err) {
+      throw ('error');
+    } else {
+      var data = _.map(files, (file) => {
+        var fileName = file.split('.');
+        return { id: fileName[0], text: fileName[0] };
+      });
+      callback(null, data);
+    }
   });
-  callback(null, data);
 };
 
 exports.readOne = (id, callback) => {
