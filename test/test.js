@@ -190,7 +190,7 @@ describe('todos', () => {
   describe('delete', () => {
     beforeEach((done) => {
       todos.create('delete this todo', done);
-    });
+    })
 
     it('should not change the counter', (done) => {
       todos.delete('00001', (err) => {
