@@ -40,7 +40,7 @@ const writeCounter = (count, callback) => {
 
 // Public API - Fix this function //////////////////////////////////////////////
 
-exports.getNextUniqueId = () => {
+exports.getNextUniqueId = (callback) => {
   readCounter((err, data) => {
     if (err) {
       throw ('error reading counter');
@@ -50,7 +50,7 @@ exports.getNextUniqueId = () => {
         if (err) {
           throw ('error writing counter');
         } else {
-          return data;
+          callback(null, data);
         }
       });
     }
