@@ -119,12 +119,12 @@ describe('todos', () => {
     it('should return an array with all saved todos', (done) => {
       const todo1text = 'todo 1';
       const todo2text = 'todo 2';
-      const expectedTodoList = [{ id: '00001', text: '00001' }, { id: '00002', text: '00002' }];
+      const expectedTodoList = [{ id: '00001', text: 'todo 1' }, { id: '00002', text: 'todo 2' }];
       todos.create(todo1text, (err, todo) => {
         todos.create(todo2text, (err, todo) => {
           todos.readAll((err, todoList) => {
             expect(todoList).to.have.lengthOf(2);
-            expect(todoList).to.deep.include.members(expectedTodoList, 'NOTE: Text field should use the Id initially');
+            expect(todoList).to.deep.include.members(expectedTodoList);
             done();
           });
         });
@@ -190,7 +190,7 @@ describe('todos', () => {
   describe('delete', () => {
     beforeEach((done) => {
       todos.create('delete this todo', done);
-    })
+    });
 
     it('should not change the counter', (done) => {
       todos.delete('00001', (err) => {
