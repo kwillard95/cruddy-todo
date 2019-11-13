@@ -38,8 +38,8 @@ exports.readAll = (callback) => {
           });
         });
       });
-      Promise.all(data)
-      .then()
+      Promise.all(data);
+      // .then()
     }
   });
 };
